@@ -23,21 +23,6 @@ static void pd14_pd15_low_init(void)
     HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14 | GPIO_PIN_15, GPIO_PIN_RESET);
 }
 
-static float yaw_wrap_360(float angle)
-{
-    while(angle >= 360.0f)
-    {
-        angle -= 360.0f;
-    }
-
-    while(angle < 0.0f)
-    {
-        angle += 360.0f;
-    }
-
-    return angle;
-}
-
 int main(void)
 {
     HAL_Init();                         /* 初始化HAL库 */
@@ -59,7 +44,7 @@ int main(void)
             INS_Task();
             roll = INS.Roll;
             pitch = INS.Pitch;
-            yaw = yaw_wrap_360(INS.YawTotalAngle);
+            yaw = INS.YawTotalAngle;
         }
 
         if(tim_100ms_flag)

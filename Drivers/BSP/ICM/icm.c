@@ -179,14 +179,6 @@ void icm_getdata(float *ax,float *ay,float *az,
             icm_gyro_bias_x += ICM_GYRO_BIAS_ADAPT_ALPHA * gx_corr;
             icm_gyro_bias_y += ICM_GYRO_BIAS_ADAPT_ALPHA * gy_corr;
             icm_gyro_bias_z += ICM_GYRO_BIAS_ADAPT_ALPHA * gz_corr;
-
-            gx_corr = 0.0f;
-            gy_corr = 0.0f;
-            gz_corr = 0.0f;
-            gx_lpf = 0.0f;
-            gy_lpf = 0.0f;
-            gz_lpf = 0.0f;
-            gyro_lpf_init = 1;
         }
     }
     else

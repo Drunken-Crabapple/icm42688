@@ -35,9 +35,6 @@ void INS_Init(void)
 
 void INS_Task(void)
 {
-    static float yaw_hold = 0.0f;
-    static float yaw_total_hold = 0.0f;
-    static uint8_t yaw_hold_valid = 0U;
     float ax_g;
     float ay_g;
     float az_g;
@@ -84,22 +81,8 @@ void INS_Task(void)
 
     INS.Pitch = QEKF_INS.Pitch;
     INS.Roll = QEKF_INS.Roll;
-
-    if (icm_static_flag) {
-        if (!yaw_hold_valid) {
-            yaw_hold = QEKF_INS.Yaw;
-            yaw_total_hold = QEKF_INS.YawTotalAngle;
-            yaw_hold_valid = 1U;
-        }
-        INS.Yaw = yaw_hold;
-        INS.YawTotalAngle = yaw_total_hold;
-    } else {
-        yaw_hold = QEKF_INS.Yaw;
-        yaw_total_hold = QEKF_INS.YawTotalAngle;
-        yaw_hold_valid = 1U;
-        INS.Yaw = QEKF_INS.Yaw;
-        INS.YawTotalAngle = QEKF_INS.YawTotalAngle;
-    }
+    INS.Yaw = QEKF_INS.Yaw;
+    INS.YawTotalAngle = QEKF_INS.YawTotalAngle;
 }
 
 void BodyFrameToEarthFrame(const float *vecBF, float *vecEF, float *q)
