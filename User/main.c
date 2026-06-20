@@ -44,7 +44,7 @@ int main(void)
             INS_Task();
             roll = INS.Roll;
             pitch = INS.Pitch;
-            yaw = INS.Yaw;
+            yaw = INS.YawTotalAngle;
         }
 
         if(tim_100ms_flag)
